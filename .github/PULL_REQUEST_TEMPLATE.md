@@ -2,7 +2,7 @@
 
 - 
 
----
+<br/>
 
 ## 🔨 Changes
 
@@ -10,12 +10,12 @@
 - **Fixed**: 
 - **Refactored**: 
 
----
+<br/>
 
 ## 🧪 Testing Method
 - 
 
----
+<br/>
 
 ## 📝 Pull Request Checklist
 
@@ -24,8 +24,6 @@
 - [ ] I have run **tests** locally to verify that everything works.
 - [ ] I have updated any **documentation** (if applicable).
 
----
+<br/>
 
 ## 📷 Screenshots (Optional)
-
----
