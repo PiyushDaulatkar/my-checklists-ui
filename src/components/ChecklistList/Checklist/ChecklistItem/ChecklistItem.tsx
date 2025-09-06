@@ -1,16 +1,24 @@
+import type React from "react";
+
 import styles from "./ChecklistItem.module.css";
 
-function ChecklistItem() {
+interface ChecklistItemProps {
+  checklistItemText: string;
+  onEditItem: () => void;
+  onDeleteItem: () => void;
+}
+
+const ChecklistItem: React.FC<ChecklistItemProps> = (props) => {
   return (
     <li className={styles.item}>
       <label className={styles.label}>
         <input type="checkbox" />
-        <span>Sample Checklist Item</span>
+        <span>{props.checklistItemText}</span>
       </label>
-      <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={props.onEditItem}>Edit</button>
+      <button onClick={props.onDeleteItem}>Delete</button>
     </li>
   );
-}
+};
 
 export default ChecklistItem;
