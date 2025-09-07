@@ -1,12 +1,21 @@
 import ChecklistItem from "./ChecklistItem/ChecklistItem";
 
-import ChecklistListData from "../../../../mockdata/checkListItems.json";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function Checklist() {
-  const [ChecklistList, setChecklistList] =
-    useState<{ id: string; text: string }[]>(ChecklistListData);
+interface ChecklistProps {
+  checklist: {
+    id: string;
+    title: string;
+    items: { id: string; text: string }[];
+  };
+}
+
+const Checklist: React.FC<ChecklistProps> = ({ checklist }) => {
+  const [ChecklistList, setChecklistList] = useState<
+    { id: string; text: string }[]
+  >(checklist.items);
   const [currentEditingId, setCurrentEditingId] = useState<string | null>(null);
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   function handleDeleteItem(id: string | null) {
     console.log("Delete item with id:", id);
@@ -30,22 +39,24 @@ function Checklist() {
 
   return (
     <ul>
-      {ChecklistList.map((item) => {
-        return (
-          <ChecklistItem
-            key={item.id}
-            id={item.id}
-            checklistItemText={item.text}
-            currentEditingId={currentEditingId}
-            onStartEdit={handleEditItem}
-            onDeleteItem={handleDeleteItem}
-            onConfirmEdit={handleYesEdit}
-            onCancelEdit={() => setCurrentEditingId(null)}
-          />
-        );
-      })}
+      <button onClick={() => setIsToggled((prev) => !prev)}>toggle</button>
+      {isToggled &&
+        ChecklistList.map((item) => {
+          return (
+            <ChecklistItem
+              key={item.id}
+              id={item.id}
+              checklistItemText={item.text}
+              currentEditingId={currentEditingId}
+              onStartEdit={handleEditItem}
+              onDeleteItem={handleDeleteItem}
+              onConfirmEdit={handleYesEdit}
+              onCancelEdit={() => setCurrentEditingId(null)}
+            />
+          );
+        })}
     </ul>
   );
-}
+};
 
 export default Checklist;
